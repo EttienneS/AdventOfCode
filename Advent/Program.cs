@@ -21,7 +21,7 @@ var solutions = new List<ISolution>()
 if (debug)
 {
     // remove all but last
-    solutions.RemoveRange(0, solutions.Count - 2);
+    solutions.RemoveRange(0, solutions.Count - 1);
 }
 
 

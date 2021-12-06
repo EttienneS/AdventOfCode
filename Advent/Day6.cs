@@ -8,30 +8,11 @@ internal class Day6 : ISolution
     /// </summary>
     public void Part1()
     {
-        return;
-
         // naive approach:
         var input = File.ReadAllText("./inputs/day6.txt");
         var values = input.Split(',').Select(int.Parse).ToList();
-        var days = 80;
 
-        for (int i = 0; i < days; i++)
-        {
-            var newValues = new List<int>();
-            for (int j = 0; j < values.Count; j++)
-            {
-                if (--values[j] < 0)
-                {
-                    values[j] = 6;
-                    newValues.Add(8);
-                }
-            }
-            values.AddRange(newValues);
-
-            Console.WriteLine($"After\t{i + 1} day there are {values.Count}");
-        }
-        // 351188
-        Console.Write($"Total: {values.Count}");
+        CalculateSpawn(values, 80);
     }
 
 
