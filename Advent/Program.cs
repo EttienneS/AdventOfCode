@@ -10,6 +10,7 @@ var solutions = new List<ISolution>()
 {
     new Advent.Day1.Day1(),
     new Advent.Day1.Day2(),
+    new Advent.Day1.Day3(),
 };
 
 foreach (var solution in solutions)
