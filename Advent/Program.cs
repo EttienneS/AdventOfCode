@@ -9,6 +9,7 @@ Console.WriteLine();
 var solutions = new List<ISolution>()
 {
     new Advent.Day1.Day1(),
+    new Advent.Day1.Day2(),
 };
 
 foreach (var solution in solutions)
