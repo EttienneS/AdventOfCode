@@ -8,10 +8,11 @@ Console.WriteLine();
 
 var solutions = new List<ISolution>()
 {
-    new Advent.Day1.Day1(),
-    new Advent.Day1.Day2(),
-    new Advent.Day1.Day3(),
-    new Advent.Day1.Day4(),
+    new Day1(),
+    new Day2(),
+    new Day3(),
+    new Day4(),
+    new Day5(),
 };
 
 foreach (var solution in solutions)

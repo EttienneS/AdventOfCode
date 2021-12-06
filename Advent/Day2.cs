@@ -1,4 +1,4 @@
-﻿namespace Advent.Day1
+﻿namespace Advent
 {
     /// <summary>
     /// https://adventofcode.com/2021/day/2
