@@ -1,19 +1,15 @@
-﻿using System.Diagnostics;
-
-namespace Advent
+﻿namespace Advent
 {
     /// <summary>
     /// https://adventofcode.com/2021/day/6
     /// </summary>
     internal class Day6 : ISolution
     {
-        private readonly Stopwatch _sw;
         private readonly List<int> _values;
 
         public Day6()
         {
             _values = File.ReadAllText("./inputs/day6.txt").Split(',').Select(int.Parse).ToList();
-            _sw = new Stopwatch();
         }
 
         public void Part1()
@@ -37,8 +33,6 @@ namespace Advent
 
         private void CalculateSpawn(List<int> values, int days)
         {
-            _sw.Restart();
-
             var fish = new Dictionary<int, long>();
             foreach (var value in values)
             {
@@ -67,7 +61,6 @@ namespace Advent
                 fish = newFish;
             }
 
-            Console.WriteLine($"{days} days calculated in {_sw.ElapsedMilliseconds}ms");
             Console.WriteLine($"Total: {fish.Select(f => f.Value).Sum()}");
         }
     }
