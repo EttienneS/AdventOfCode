@@ -18,7 +18,8 @@ var solutions = new List<ISolution>()
     new Day5(),
     new Day6(),
     new Day7(),
-    new Day8()
+    new Day8(),
+    new Day9(),
 };
 
 if (debug)
@@ -44,7 +45,10 @@ foreach (var solution in solutions)
     Console.WriteLine();
     solution.Part1();
     Console.WriteLine();
+    Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine($"Part complete in {sw.ElapsedMilliseconds}");
+    Console.ForegroundColor = ConsoleColor.Gray;
+
     Console.WriteLine("-----  PART 1  -----");
     Console.WriteLine();
 
@@ -55,7 +59,9 @@ foreach (var solution in solutions)
     Console.WriteLine();
     solution.Part2();
     Console.WriteLine();
+    Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine($"Part complete in {sw.ElapsedMilliseconds}");
+    Console.ForegroundColor = ConsoleColor.Gray;
     Console.WriteLine("-----  PART 2  -----");
     Console.WriteLine();
     Console.WriteLine("===========================================================");
