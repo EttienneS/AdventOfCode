@@ -7,7 +7,7 @@ using System.Diagnostics;
 Console.WriteLine("Merry Advent of code 2021!!");
 Console.WriteLine();
 
-var debug = false;
+var debug = true;
 
 var solutions = new List<ISolution>()
 {
@@ -18,6 +18,7 @@ var solutions = new List<ISolution>()
     new Day5(),
     new Day6(),
     new Day7(),
+    new Day8()
 };
 
 if (debug)
