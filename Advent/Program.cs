@@ -3,31 +3,23 @@
 
 using Advent;
 using System.Diagnostics;
+using System.Reflection;
 
 Console.WriteLine("Merry Advent of code 2021!!");
 Console.WriteLine();
 
 var debug = true;
 
-var solutions = new List<ISolution>()
-{
-    new Day1(),
-    new Day2(),
-    new Day3(),
-    new Day4(),
-    new Day5(),
-    new Day6(),
-    new Day7(),
-    new Day8(),
-    new Day9(),
-};
+var solutions = GetSolutions();
 
 if (debug)
 {
-    // remove all but last
-    solutions.RemoveRange(0, solutions.Count - 1);
+    // only get the highest numbered solution by removing the Day part from the name and selecting the one with the biggest number
+    solutions = new List<ISolution>
+    {
+        solutions.First(s => s.GetType().Name.EndsWith("Day" + solutions.Max(s => int.Parse(s.GetType().Name.Replace("Day", string.Empty)))))
+    };
 }
-
 
 var sw = Stopwatch.StartNew();
 foreach (var solution in solutions)
@@ -68,4 +60,27 @@ foreach (var solution in solutions)
 }
 
 
+static List<ISolution> GetSolutions()
+{
+    AppDomain app = AppDomain.CurrentDomain;
+    Assembly[] ass = app.GetAssemblies();
+    Type[] types;
+    Type targetType = typeof(ISolution);
 
+    var solutions = new List<ISolution>();
+    foreach (Assembly a in ass)
+    {
+        types = a.GetTypes();
+        foreach (Type t in types)
+        {
+            if (t.IsInterface) continue;
+            if (t.IsAbstract) continue;
+            foreach (Type iface in t.GetInterfaces())
+            {
+                if (!iface.Equals(targetType)) continue;
+                solutions.Add((ISolution)Activator.CreateInstance(t));
+            }
+        }
+    }
+    return solutions;
+}
