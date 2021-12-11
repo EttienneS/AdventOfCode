@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Advent.Common.Extensions;
+using System.Diagnostics;
 
 namespace Advent
 {
@@ -57,7 +58,7 @@ namespace Advent
                     Console.ForegroundColor = ConsoleColor.White;
 
                     var thisValue = _values[x, y];
-                    if (GetNeighbours(x, y).All(n => n.value >= thisValue))
+                    if (_values.GetNeighbours(x, y).All(n => n.value >= thisValue))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
 
@@ -74,55 +75,7 @@ namespace Advent
             return lowPoints;
         }
 
-        private List<(int x, int y, int value)> GetNeighbours(int x, int y, bool cardinalOnly = false)
-        {
-            var neighbours = new List<(int x, int y, int value)>();
-            if (x > 0)
-            {
-                neighbours.Add((x - 1, y, _values[x - 1, y]));
-            }
-            if (x < _maxX)
-            {
-                neighbours.Add((x + 1, y, _values[x + 1, y]));
-            }
-
-            if (y > 0)
-            {
-                neighbours.Add((x, y - 1, _values[x, y - 1]));
-
-                if (!cardinalOnly)
-                {
-                    if (x > 0)
-                    {
-                        neighbours.Add((x - 1, y - 1, _values[x - 1, y - 1]));
-                    }
-                    if (x < _maxX)
-                    {
-                        neighbours.Add((x + 1, y - 1, _values[x + 1, y - 1]));
-                    }
-                }
-
-            }
-
-            if (y < _maxY)
-            {
-                neighbours.Add((x, y + 1, _values[x, y + 1]));
-
-                if (!cardinalOnly)
-                {
-                    if (x > 0)
-                    {
-                        neighbours.Add((x - 1, y + 1, _values[x - 1, y + 1]));
-                    }
-                    if (x < _maxX)
-                    {
-                        neighbours.Add((x + 1, y + 1, _values[x + 1, y + 1]));
-                    }
-                }
-            }
-
-            return neighbours;
-        }
+        
 
         public void Part2()
         {
@@ -141,7 +94,7 @@ namespace Advent
                     var current = frontier.Dequeue();
                     closed.Add(current);
 
-                    foreach (var neighbor in GetNeighbours(current.x, current.y, true).Where(n => n.value < 9 && !closed.Contains((n.x, n.y))).Select(p => (p.x, p.y)))
+                    foreach (var neighbor in _values.GetNeighbours(current.x, current.y, true).Where(n => n.value < 9 && !closed.Contains((n.x, n.y))).Select(p => (p.x, p.y)))
                     {
                         if (!frontier.Contains(neighbor))
                         {
