@@ -8,7 +8,7 @@ using System.Reflection;
 Console.WriteLine("Merry Advent of code 2021!!");
 Console.WriteLine();
 
-var debug = true;
+var debug = false;
 
 var solutions = GetSolutions();
 
@@ -18,6 +18,17 @@ if (debug)
     solutions = new List<ISolution>
     {
         solutions.First(s => s.GetType().Name.EndsWith("Day" + solutions.Max(s => int.Parse(s.GetType().Name.Replace("Day", string.Empty)))))
+    };
+}
+
+Console.Write("What day do you want to run? (blank for all) ");
+var selection = Console.ReadLine();
+
+if (int.TryParse(selection, out var result))
+{
+    solutions = new List<ISolution>
+    {
+        solutions.First(s => s.GetType().Name.EndsWith("Day" + result))
     };
 }
 
@@ -58,6 +69,7 @@ foreach (var solution in solutions)
     Console.WriteLine();
     Console.WriteLine("===========================================================");
 }
+
 
 
 static List<ISolution> GetSolutions()
